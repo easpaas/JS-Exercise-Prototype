@@ -101,18 +101,29 @@ Car.prototype.drive = function (distance) {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+// Baby constructor
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
 
+  this.favoriteToy = favoriteToy;
+};
+
+// Inherit Person attributes
+Baby.prototype = Object.create(Person.prototype);
+
+// Baby prototypes
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
 }
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global use of this refers to the browser window.
+  2. Implicit binding use of this refers to when a function makes a call preceding a dot. The object before the dot is where this points to. 
+  3. New binding use of this refers to the object that was created and returned by the constructor
+  4. Explicit binding use of this refers to the ability to use the methods, call and apply for a specific instance of an object. 
 */
 
 
