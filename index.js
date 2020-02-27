@@ -39,9 +39,28 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+// Person Constructor
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+// Person prototypes
+Person.prototype.eat = function (someFood) {
+  if (this.stomach.length < 10) {
+    this.stomach.push(someFood);
+  }
+};
+
+Person.prototype.poop = function () {
+  this.stomach = [];
+};
+
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`;
+};
+
 
 /*
   TASK 2
@@ -57,9 +76,23 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+// Car constructor
+function Car(model, milesPerGallon) {
+  this.model = model; 
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;;
+  this.odometer = 0;
+};
 
-}
+// Car prototypes
+Car.prototype.fill = function (gallons) {
+  this.tank += gallons;
+};
+
+// STRETCH Car prototype
+Car.prototype.drive = function (distance) {
+  // this.tank !== 0 && 
+}; 
 
 /*
   TASK 3
@@ -68,18 +101,29 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+// Baby constructor
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
 
+  this.favoriteToy = favoriteToy;
+};
+
+// Inherit Person attributes
+Baby.prototype = Object.create(Person.prototype);
+
+// Baby prototypes
+Baby.prototype.play = function () {
+  return `Playing with ${this.favoriteToy}`;
 }
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Window/Global use of this refers to the browser window.
+  2. Implicit binding use of this refers to when a function makes a call preceding a dot. The object before the dot is where this points to. 
+  3. New binding use of this refers to the object that was created and returned by the constructor
+  4. Explicit binding use of this refers to the ability to use the methods, call and apply for a specific instance of an object. 
 */
 
 
