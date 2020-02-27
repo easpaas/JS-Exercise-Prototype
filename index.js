@@ -80,7 +80,7 @@ Person.prototype.toString = function () {
 function Car(model, milesPerGallon) {
   this.model = model; 
   this.milesPerGallon = milesPerGallon;
-  this.tank = 0;;
+  this.tank = 0;
   this.odometer = 0;
 };
 
@@ -91,7 +91,14 @@ Car.prototype.fill = function (gallons) {
 
 // STRETCH Car prototype
 Car.prototype.drive = function (distance) {
-  // this.tank !== 0 && 
+  let maxDistance = this.tank * this.milesPerGallon;
+  let fuelConsumption = (distance / this.milesPerGallon);
+
+  if (fuelConsumption > this.tank) {
+    return `I ran out of fuel at ${maxDistance} miles!`;
+  }
+    this.odometer += distance;
+    this.tank -= fuelConsumption;
 }; 
 
 /*
@@ -103,8 +110,9 @@ Car.prototype.drive = function (distance) {
 */
 // Baby constructor
 function Baby(name, age, favoriteToy) {
+  // Explicit binding to Person object 
   Person.call(this, name, age);
-
+  
   this.favoriteToy = favoriteToy;
 };
 
